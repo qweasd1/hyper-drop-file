@@ -16,6 +16,12 @@ function sendSessionData(uid, data, escaped) {
   })(_store.dispatch, _store.getState);
 }
 
+function getCurrentWindow(){
+  return window.require('electron').remote.getCurrentWindow()
+}
+
+
+
 exports.onRendererWindow = (window) => {
   window.document.addEventListener('DOMContentLoaded', () => {
 
@@ -29,7 +35,10 @@ exports.onRendererWindow = (window) => {
       // e.stopPropagation()
       for (let file of e.dataTransfer.files) {
         sendSessionData(null, file.path)
+        break
       }
+
+      getCurrentWindow().focus()
     })
   })
 
