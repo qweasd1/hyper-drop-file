@@ -1,0 +1,22 @@
+{
+  "name": "hyper-drop-file",
+  "version": "1.0.0",
+  "description": "the hyper plugin to let you drop file path into your terminal",
+  "dependencies": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "hyper",
+    "hyper.app",
+    "hyperterm",
+    "hyper-plugin",
+    "hyperterm-plugin",
+    "hyper-extension",
+    "drop",
+    "drop-folder"
+  ]
+}
