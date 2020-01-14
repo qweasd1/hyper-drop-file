@@ -34,7 +34,8 @@ exports.onRendererWindow = (window) => {
       // e.preventDefault()
       // e.stopPropagation()
       for (let file of e.dataTransfer.files) {
-        sendSessionData(null, file.path)
+        const pathname = /\s/.test(file.path) ? '"' + file.path + '"' : file.path;
+        sendSessionData(null, pathname)
         break
       }
 
