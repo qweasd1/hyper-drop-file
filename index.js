@@ -2,6 +2,14 @@ SESSION_USER_DATA = "SESSION_USER_DATA"
 
 let _store
 
+const WHITESPACE_PATTERN = / /g
+
+function escapeWhitepsaceInDirectory(path) {
+  // only support linux and mac style now
+  return path.replace(WHITESPACE_PATTERN,"\\ ")
+}
+
+
 function sendSessionData(uid, data, escaped) {
   return ((dispatch, getState) => {
     dispatch({
@@ -34,7 +42,7 @@ exports.onRendererWindow = (window) => {
       // e.preventDefault()
       // e.stopPropagation()
       for (let file of e.dataTransfer.files) {
-        sendSessionData(null, file.path)
+        sendSessionData(null, escapeWhitepsaceInDirectory(file.path))
         break
       }
 
