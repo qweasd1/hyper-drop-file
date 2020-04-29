@@ -33,12 +33,14 @@ function getCurrentWindow(){
 exports.onRendererWindow = (window) => {
   window.document.addEventListener('DOMContentLoaded', () => {
 
-    window.document.querySelector("#hyper").addEventListener("dragover", (e) => {
+    const dropTargetElement = window.document.querySelector("#hyper") || window.document.querySelector(".hyper_main")
+
+    dropTargetElement.addEventListener("dragover", (e) => {
       e.preventDefault()
       e.stopPropagation()
     })
   //
-    window.document.querySelector("#hyper").addEventListener("drop", (e) => {
+    dropTargetElement.addEventListener("drop", (e) => {
       // e.preventDefault()
       // e.stopPropagation()
       for (let file of e.dataTransfer.files) {
