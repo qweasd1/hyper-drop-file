@@ -53,7 +53,6 @@ exports.onRendererWindow = (window) => {
       e.preventDefault()
       e.stopPropagation()
     })
-    window.a=hyperDropFileConfig
     dropTargetElement.addEventListener("drop", (e) => {
       for (let file of e.dataTransfer.files) {
         optimizePath = file.path
