@@ -12,9 +12,8 @@ const DEFAULTS = {
 const hyperDropFileConfig = {}
 
 function win2posix(path) {
-  tmpPath = new URL(path).pathname
-  drive = tmpPath.match(/^(\/[a-zA-Z])/)[0].toLowerCase()
-  tmpPath.replace(/^\/[a-zA-Z]\:/, drive)
+  const tmpPath = new URL(path).pathname
+  const drive = tmpPath.match(/^(\/[a-zA-Z])/)[0].toLowerCase()
   return `${hyperDropFileConfig.DRIVE_PREFIX}${tmpPath.replace(/^\/[a-zA-Z]\:/, drive)}`
 }
 
@@ -55,7 +54,7 @@ exports.onRendererWindow = (window) => {
     })
     dropTargetElement.addEventListener("drop", (e) => {
       for (let file of e.dataTransfer.files) {
-        optimizePath = file.path
+        let optimizePath = file.path
         hyperDropFileConfig.ENABLE_WIN2POSIX && (optimizePath = win2posix(file.path))
         sendSessionData(null, escapeWhitepsaceInDirectory(optimizePath))
         break
