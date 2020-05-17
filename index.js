@@ -44,7 +44,15 @@ exports.onRendererWindow = (window) => {
       // e.preventDefault()
       // e.stopPropagation()
       for (let file of e.dataTransfer.files) {
-        sendSessionData(null, escapeWhitepsaceInDirectory(file.path))
+        const hyperConfig = config.getConfig()
+        let rewritePath = null
+        if("hyperDropFile" in hyperConfig && hyperConfig.hyperDropFile.pathRewriter){
+          rewritePath = hyperConfig.hyperDropFile.pathRewriter(file.path,hyperConfig)
+        }
+        else {
+          rewritePath = escapeWhitepsaceInDirectory(file.path)
+        }
+        sendSessionData(null, rewritePath)
         break
       }
 
