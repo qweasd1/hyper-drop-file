@@ -2,13 +2,10 @@ SESSION_USER_DATA = "SESSION_USER_DATA"
 
 let _store
 
-const WHITESPACE_PATTERN = / /g
-
-function escapeWhitepsaceInDirectory(path) {
+function escapeShellMeta(path) {
   // only support linux and mac style now
-  return path.replace(WHITESPACE_PATTERN,"\\ ")
+  return path.replace(/(?=[!"#$&'()*,;<=>?[\]^`{|}~ ])/g, '\\')
 }
-
 
 function sendSessionData(uid, data, escaped) {
   return ((dispatch, getState) => {
@@ -50,7 +47,7 @@ exports.onRendererWindow = (window) => {
           rewritePath = hyperConfig.hyperDropFile.pathRewriter(file.path,hyperConfig)
         }
         else {
-          rewritePath = escapeWhitepsaceInDirectory(file.path)
+          rewritePath = escapeShellMeta(file.path)
         }
         sendSessionData(null, rewritePath)
         break
